@@ -1,5 +1,5 @@
 import 'dart:io';
-//void main(){
+// void main(){
 //--------------SECTION A-------------
 /* 
  1.Write a Dart program to declare a Map with the following key-value pairs:
@@ -20,7 +20,7 @@ import 'dart:io';
 // all even numbers from 1 to 20 using a for loop
 
 // int num=20;
-//print("Even numbers from 1 to 20 are:")
+// print("Even numbers from 1 to 20 are:");
 // for(int i=1;i<=num;i++){
 //   if(i%2==0){
 //     print(i);
@@ -80,7 +80,7 @@ import 'dart:io';
 // print(sum);
 
 //---------------------------------------------------------------------
-//}
+// }
 /* 5.Write a function named findLargest that accepts a List<int> as a parameter and returns the
  largest number in the list.
  Example:
@@ -88,7 +88,7 @@ import 'dart:io';
  Output: 89*/
 
 //  void main(){
-//   List<int> list1=[12,45,70,89,23];
+//   List<int> list1=[12,45,7,89,23];
 //   int largest=findLargest(list1);
 //   print("The largest number in the ist $list1 is $largest");
 //  }
