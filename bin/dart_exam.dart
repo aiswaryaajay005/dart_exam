@@ -88,7 +88,7 @@ import 'dart:io';
  Output: 89*/
 
 //  void main(){
-//   List<int> list1=[12,45,7,89,23];
+//   List<int> list1=[120,45,7,89,23];
 //   int largest=findLargest(list1);
 //   print("The largest number in the ist $list1 is $largest");
 //  }
@@ -106,4 +106,206 @@ import 'dart:io';
 
 //-----------------------------------------------------------------------
 //-----------------------------------------------------------------------
+//Section b----------
+  //1. Write a program to print the following pattern:
+  /* 
+        * * * * * * * * * 
+          *           *   
+            *       *     
+              *   *       
+                *
+              *   *
+            *       *
+          *           *
+        * * * * * * * * *
+*/
+// void main(){
 
+//   for(int row=1;row<=9;row++){
+//     for(int col=1;col<=9;col++){
+//       if(row==col || row==1 || row==9 || row+col==10){
+//   stdout.write("* ");}
+//   else{
+//     stdout.write("  ");
+//   }}
+//   print("");
+// }
+
+// }
+
+// ---------------------------------------------------------------------------
+
+/*2.Write a Dart  program that accepts integers into a list until 0 is entered.
+ Generate separate
+ lists for odd and even numbers from that list and Print the greatest number in
+ the main list. */
+ 
+
+//  void main(){
+//   List<int> input=[];
+//   List<int> even=[];
+//   List<int> odd=[];
+//   print("Enter the list elements(Want to exit click 0):");
+//   for(;;){
+//    int num=int.parse(stdin.readLineSync()!);
+//    if(num == 0){
+//     break;
+//    }else{
+//     input.add(num);
+//     if(num %2 ==0){
+//      even.add(num);
+//     }else{
+//       odd.add(num);
+//     }
+//    }
+//   }
+//     print("The main list is :$input");
+//     print("The list of even  numbers from main list is $even");
+//     print("The list of odd numbers from main list is $odd");
+//     int largest=input[0];
+//      int len=input.length;
+
+//   for(int i=0;i<len;i++){
+    
+//     if(input[i] > largest){
+//       largest=input[i];
+//     }
+//  }
+//  print("The largest element in the main list $input is $largest");
+//  }
+
+//--------------------------------------------------------------------------------
+
+/*3.Create a console-based Library Management System with the following
+ functionalities:
+ sample output :
+Welcome to the Library Management System!
+ Choose an option:
+ 1. AddBook
+ 2. Edit Book
+ 3. Delete Book
+ 4. Get All Books
+ Enter your choice (1-4): 1
+ Enter book title: The Great Gatsby
+ Enter book author: F. Scott Fitzgerald
+ Book added successfully!
+ Doyouwanttocontinue? (yes/no): yes
+ Choose an option:
+ 1. AddBook
+ 2. Edit Book
+ 3. Delete Book
+ 4. Get All Books
+ Enter your choice (1-4): 4--- List of Books--
+1. Title: The Great Gatsby, Author: F. Scott Fitzgerald
+ Doyouwanttocontinue? (yes/no): no
+ Thank you for using the Library Management System. Goodbye */
+void main(){
+  List<Map> books=[];
+  print("Welcome to the Library Management System!");
+  
+  for(;;){
+  print("""Choose an option:
+  1. Add Book
+  2. Edit Book
+  3. Delete Book
+  4. Get All Books""");
+  stdout.write("Enter your choice:");
+  int ? input = int.tryParse(stdin.readLineSync()!);
+  
+  switch(input){
+    case 1:
+        Map newBook=addBook();
+    books.add(newBook);
+    print(books);
+    break;
+    case 2:
+       editBook(books);
+       print("Book added successfully");
+       break;
+    case 3:
+         deleteBook(books);
+         break;
+    case 4:
+         getAllBooks(books);
+         break;
+    default:
+     print("Enter a valid choice");
+     break;
+
+  }
+ 
+
+  stdout.write("Do you want to continue? (yes/no):");
+  String? userChoice=stdin.readLineSync()!;
+  if(userChoice.toLowerCase() != 'no' && userChoice.toLowerCase() != 'yes'){
+    print("Invalid character! Enter yes or no to continue ");
+     stdout.write("Do you want to continue? (yes/no): ");
+  userChoice = stdin.readLineSync();
+  }
+  if(userChoice?.toLowerCase() == 'no'){
+    print("Thank you for using the Library Management System. Goodbye!");
+    break;
+  }
+  }
+  
+}
+Map addBook(){
+stdout.write("Enter book title:");
+String bookName=stdin.readLineSync()!;
+stdout.write("Enter book author:");
+String authorName=stdin.readLineSync()!;
+Map newBook={"name": bookName , "author": authorName};
+return newBook;
+}
+void editBook(List<Map> books){
+  print("EXISTING BOOK DETAILS:");
+  for(int i=0;i<books.length;i++){
+  print("Book at index $i: \n Title: ${books[i]["name"]} \n Author: ${books[i]["author"]}");
+}
+  stdout.write("Enter index of the value to be edited:");
+  String index=stdin.readLineSync()!;
+  int ind=int.parse(index);
+  if(ind < -1 || ind>books.length){
+    print("Enter a valid index");
+    return;
+  }else{
+    print("------PREVIOUS BOOK DETAILS------");
+    print("Name: ${books[ind]["name"]} \n Author: ${books[ind]["author"]}");
+  stdout.write("Enter the new book title:");
+  String newName=stdin.readLineSync()!;
+  stdout.write("Enter the author name:");
+  String newAuthor=stdin.readLineSync()!;
+  books[ind]["name"]=newName;
+  books[ind]["author"]=newAuthor;
+ 
+  }
+  print("Edited successfully");
+   print("------EDITED BOOK DETAILS------");
+    print("Title: ${books[ind]["name"]}\nAuthor: ${books[ind]["author"]}");
+    
+  
+}
+void deleteBook(List<Map> books){
+for(int i=0;i<books.length;i++){
+  print("Book at index $i: \n Title: ${books[i]["name"]} \n Author: ${books[i]["author"]}");
+}
+stdout.write("Enter index of the value to be deleted:");
+  String index=stdin.readLineSync()!;
+  int ind=int.parse(index);
+  if(ind < -1 || ind>books.length){
+    print("Enter a valid index");
+    return;
+  }else{
+    books.removeAt(ind);
+    print("Value deleted successfully");
+  }
+}
+void getAllBooks(List<Map> books){
+  print("--- List of Books--");
+for(int i=0;i<books.length;i++){
+  print("Book ${i+1}: \n Title: ${books[i]["name"]} \n Author: ${books[i]["author"]}");
+}
+}
+
+//-------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
